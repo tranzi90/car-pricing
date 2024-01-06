@@ -26,9 +26,15 @@ export class UsersService {
     if (!user) {
       throw new Error('No such user');
     }
-
     Object.assign(user, attrs);
-
     return this.repo.save(user);
+  }
+
+  async remove(id: number) {
+    const user = await this.repo.findOneBy({ id });
+    if (!user) {
+      throw new Error('No such user');
+    }
+    return this.repo.remove(user);
   }
 }
